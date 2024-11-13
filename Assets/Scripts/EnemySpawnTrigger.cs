@@ -13,7 +13,7 @@ public class EnemySpawnTrigger : MonoBehaviour
     /// RegisterFactory で登録されたファクトリメソッドを依存注入する
     /// </summary>
     [Inject]
-    Func<string, Enemy> GenerateEnemy;
+    EnemySpawner EnemySpawner;
 
     [Inject]
     Timer timer;
@@ -31,7 +31,7 @@ public class EnemySpawnTrigger : MonoBehaviour
     void OnClicked()
     {
         var ID = Guid.NewGuid().ToString();
-        var enemy = GenerateEnemy(ID);
+        var enemy = EnemySpawner.Generate(ID);
 
         enemy.transform.position = new(Random.Range(0f, 320f), Random.Range(0f, 180f), 0f);
     }

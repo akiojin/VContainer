@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using VContainer;
 
-public class EnemyGenerator : MonoBehaviour
+public class EnemySpawner : MonoBehaviour
 {
+    [Inject]
+    IObjectResolver Resolver;
+
     [SerializeField]
     GameObject EnemyPrefab;
 
-    public Enemy Generate(IObjectResolver resolver, string ID)
+    public Enemy Generate(string ID)
     {
         Debug.Log($"Generate ID: {ID}");
 
@@ -15,8 +18,8 @@ public class EnemyGenerator : MonoBehaviour
         // 例) var enemy = ObjectPool.Get(ID).GetCompnent<Enemy>();
         var enemy = Instantiate(EnemyPrefab).GetComponent<Enemy>();
 
-        // 動的生成されたインスタンスに対して DI 注入
-        resolver.Inject(enemy);
+        // 動的生成されたインスタンスに対して依存注入
+        Resolver.Inject(enemy);
 
         return enemy;
     }
