@@ -9,9 +9,6 @@ public class EnemySpawnTrigger : MonoBehaviour
     [SerializeField]
     Button EnemySpawnButton;
 
-    /// <summary>
-    /// RegisterFactory で登録されたファクトリメソッドを依存注入する
-    /// </summary>
     [Inject]
     EnemySpawner EnemySpawner;
 
